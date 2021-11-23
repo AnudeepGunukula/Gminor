@@ -65,10 +65,11 @@ const Gminor = () => {
     useTrackPlayerEvents([Event.PlaybackTrackChanged], async event => {
         if (event.type == Event.PlaybackTrackChanged && event.nextTrack != null) {
             const track = await TrackPlayer.getTrack(event.nextTrack);
-            const { title, image, artist } = track;
+            const { title, image, artist, id } = track;
             setTrackTitle(title);
             setTrackArtwork(image)
             setTrackArtist(artist);
+            //  setSongIndex(id - 1);
         }
     })
 
@@ -117,20 +118,47 @@ const Gminor = () => {
         }
     }, []);
 
-    const skipToNext = () => {
-        songSlider.current.scrollToOffset(
-            {
-                offset: (songIndex + 1) * width,
-            }
-        );
+    const skipToNext = async () => {
+
+        // songSlider.current.scrollToOffset(
+        //     {
+        //         offset: (songIndex + 1) * width,
+        //     }
+        // );
+
+
+        // setNextEpisode(currentIndex);
+
+        // get the id of the current track
+        // let trackId = await TrackPlayer.getCurrentTrack();
+
+        // TrackPlayer.skip(trackId);
+
+        // console.log(trackId);
+        let trackId = await TrackPlayer.getCurrentTrack();
+
+        await TrackPlayer.skip(trackId + 1);
+
+        // const track = await TrackPlayer.getCurrentTrack();
+        // const { title, image, artist, id } = track;
+        // setTrackTitle(title);
+        // setTrackArtwork(image)
+        // setTrackArtist(artist);
+        // setSongIndex(id);
+        // console.log(songIndex, 'skip to next function');
     }
 
-    const skipToPrevious = () => {
-        songSlider.current.scrollToOffset(
-            {
-                offset: (songIndex - 1) * width,
-            }
-        );
+    const skipToPrevious = async () => {
+        // songSlider.current.scrollToOffset(
+        //     {
+
+        //         offset: (songIndex - 1) * width,
+        //     }
+        // );
+
+        let trackId = await TrackPlayer.getCurrentTrack();
+
+        await TrackPlayer.skip(trackId - 1);
     }
     const renderSongs = ({ index, item }) => {
         return (
@@ -196,6 +224,7 @@ const Gminor = () => {
                         MaximumTrackTintColor="#FFF"
                         onSlidingComplete={async (value) => {
                             await TrackPlayer.seekTo(value);
+
                         }}
 
 
