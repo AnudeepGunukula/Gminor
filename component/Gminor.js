@@ -21,15 +21,6 @@ const { width, height } = Dimensions.get('window');
 
 const setupPlayer = async () => {
     await TrackPlayer.setupPlayer();
-    // await TrackPlayer.updateOptions({
-    //     capabilities: [
-    //         Capability.Play,
-    //         Capability.Pause,
-    //         Capability.SkipToNext,
-    //         Capability.SkipToPrevious,
-    //         Capability.Stop,
-    //     ],
-    // });
 
     await TrackPlayer.add(songs);
 
@@ -120,41 +111,16 @@ const Gminor = () => {
 
     const skipToNext = async () => {
 
-        // songSlider.current.scrollToOffset(
-        //     {
-        //         offset: (songIndex + 1) * width,
-        //     }
-        // );
 
-
-        // setNextEpisode(currentIndex);
-
-        // get the id of the current track
-        // let trackId = await TrackPlayer.getCurrentTrack();
-
-        // TrackPlayer.skip(trackId);
-
-        // console.log(trackId);
         let trackId = await TrackPlayer.getCurrentTrack();
 
         await TrackPlayer.skip(trackId + 1);
 
-        // const track = await TrackPlayer.getCurrentTrack();
-        // const { title, image, artist, id } = track;
-        // setTrackTitle(title);
-        // setTrackArtwork(image)
-        // setTrackArtist(artist);
-        // setSongIndex(id);
-        // console.log(songIndex, 'skip to next function');
+
     }
 
     const skipToPrevious = async () => {
-        // songSlider.current.scrollToOffset(
-        //     {
 
-        //         offset: (songIndex - 1) * width,
-        //     }
-        // );
 
         let trackId = await TrackPlayer.getCurrentTrack();
 
