@@ -170,7 +170,7 @@ const Gminor = () => {
 
                 <View style={styles.artworkWrapper}>
                     <Image
-                        source={trackArtwork}
+                        source={{ uri: trackArtwork }}
                         style={styles.artworkImg}
                     />
 
